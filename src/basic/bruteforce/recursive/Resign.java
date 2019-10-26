@@ -11,5 +11,6 @@ public class Resign {
 		while(n-->0){
 			System.out.println("haha");
 		}
+		System.out.println("±ê Å×½ºÆ®");
 	}
 }
