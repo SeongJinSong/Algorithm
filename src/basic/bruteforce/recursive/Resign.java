@@ -9,7 +9,7 @@ public class Resign {
 		int[] t = new int[n];
 		int[] p = new int[n];
 		while(n-->0){
-			System.out.println("haha");
+			System.out.println("haha"); 
 		}
 	}
 }
