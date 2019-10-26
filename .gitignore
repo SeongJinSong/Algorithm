@@ -14,7 +14,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-/src/module-info.java
+src/module-info.java
 
 # External tool builders
 .externalToolBuilders/
