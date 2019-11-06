@@ -1,9 +1,9 @@
 package basic.solution.graph;
 /*13023*/
 import java.util.*;
-class Edge {
+class Edge1 {
     int from, to;
-    Edge(int from, int to) {
+    Edge1(int from, int to) {
         this.from = from;
         this.to = to;
     }
@@ -15,15 +15,15 @@ public class ABCDE{
         int m = sc.nextInt();
         boolean[][] a = new boolean[n][n];
         ArrayList<Integer>[] g = (ArrayList<Integer>[]) new ArrayList[n];
-        ArrayList<Edge> edges = new ArrayList<Edge>();
+        ArrayList<Edge1> edges = new ArrayList<Edge1>();
         for (int i=0; i<n; i++) {
             g[i] = new ArrayList<Integer>();
         }
         for (int i=0; i<m; i++) {
             int from = sc.nextInt();
             int to = sc.nextInt();
-            edges.add(new Edge(from, to));
-            edges.add(new Edge(to, from));
+            edges.add(new Edge1(from, to));
+            edges.add(new Edge1(to, from));
             a[from][to] = a[to][from] = true;
             g[from].add(to);
             g[to].add(from);

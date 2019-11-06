@@ -2,7 +2,7 @@ package basic.solution.graph;
 
 import java.util.*;
 
-/*class Edge implements Comparable<Edge> {
+class Edge implements Comparable<Edge> {
     int from, to;
     Edge(int from, int to) {
         this.from = from;
@@ -23,7 +23,7 @@ import java.util.*;
             return 1;
         }
     }
-}*/
+}
 public class BFS_DFS2 {
     static Edge[] edge;
     static int[] cnt;
