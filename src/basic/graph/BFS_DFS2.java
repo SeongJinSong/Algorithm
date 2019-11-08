@@ -12,18 +12,14 @@ class Edge implements Comparable<Edge>{
 	public int compareTo(Edge edge) {
 		if(this.from < edge.from) {
 			return -1;
-		}
-		else if(this.from == edge.from) {
+		}else if(this.from == edge.from) {
 			if(this.to < edge.to) {
 				return -1;
-			}
-			else if(this.to == edge.to) {
+			}else if(this.to == edge.to) {
 				return 0;
-			}
-			else
+			}else
 				return 1;
-		}
-		else
+		}else
 			return 1;
 	}
 }
@@ -46,6 +42,7 @@ public class BFS_DFS2 {
 	static void bfs(int start) {
 		Queue<Integer> q = new LinkedList<Integer>();
 		q.add(start);
+		check[start] = true;
 		while(!q.isEmpty()) {
 			int p = q.remove();
 			check[p] = true;
