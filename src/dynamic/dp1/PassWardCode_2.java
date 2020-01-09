@@ -14,8 +14,7 @@ public class PassWardCode_2 {
 		long d[] = new long[n+1];
 		d[0]=1;
 		for (int i=1; i<=n; i++) {
-            int x = a[i];
-            if (1 <= x && x <= 9) {
+            if (1 <= a[i] && a[i] <= 9) {
                 d[i] += d[i-1];
                 d[i] %= mod;
             }
@@ -25,8 +24,7 @@ public class PassWardCode_2 {
             if (a[i-1] == 0) {
                 continue;
             }
-            x = a[i-1]*10 + a[i];
-            if (10 <= x && x <= 26) {
+            if (a[i-1]*10 + a[i] >=10 && a[i-1]*10 + a[i] <= 26) {
                 d[i] += d[i-2];
                 d[i] %= mod;
             }
