@@ -1,4 +1,4 @@
-package dynamic.sol1;
+package dynamic.dp1;
 
 import java.util.*;
 public class ClimbStep_1 {
