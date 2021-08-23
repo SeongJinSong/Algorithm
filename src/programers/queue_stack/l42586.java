@@ -42,6 +42,7 @@ public class l42586 {
         		}
         	};
         	pstk.pop();
+        	sstk.pop();
         	popElemCount++;
         }
         if(popElemCount!=0)arr.add(popElemCount);
