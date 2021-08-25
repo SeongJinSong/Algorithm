@@ -42,15 +42,11 @@ public class l42586 {
         		}
         	};
         	pstk.pop();
+        	sstk.pop();
         	popElemCount++;
         }
         if(popElemCount!=0)arr.add(popElemCount);
-        
-        int[] answer = new int[arr.size()];
-        for(int i=0;i<answer.length;i++) {
-        	answer[i]=arr.get(i);
-        }
-        return answer;
+        return arr.stream().mapToInt(i->i).toArray();
     }
 	
 	/* bottom up 방식의 짧은 풀이 */
