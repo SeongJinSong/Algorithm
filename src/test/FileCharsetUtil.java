@@ -15,7 +15,7 @@ public class FileCharsetUtil {
 	
 	public static void main(String[] args) {
 		System.out.println("=============== convert start ===============");
-		getFileList("C:\\Users\\admin\\Desktop\\src".replaceAll("\\\\", "/"), 0);		
+		getFileList("window file path".replaceAll("\\\\", "/"), 0);		
 		System.out.println("=============== convert end ===============");
 	}
 	
@@ -52,8 +52,6 @@ public class FileCharsetUtil {
 	}
 	 
     public static void convertEncoding(String inFileName, String outFileName) throws Exception {
-         
-        // ================================
         FileInputStream fileInputStream = null;
         Reader reader = null;
         Writer writer = null;
