@@ -12,7 +12,7 @@ public class SumGCD {
 			for(int i=0; i<cnt; i++) {
 				nums[i] = sc.nextInt();
 			}
-			long sum = 0; //�ڡڡ��ڷ����� ���� int�� �Ѿ���� �� �����ؾ� �Ѵ�.�ڡڡ�
+			long sum = 0; //★★★자료형의 합이 int를 넘어가는지 잘 생각해야 한다.★★★
 			for(int i=0; i<cnt; i++){
 				for(int j=i;j<cnt;j++) {
 					if(i==j)continue;

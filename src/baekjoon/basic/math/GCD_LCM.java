@@ -5,15 +5,15 @@ import java.util.Scanner;
 /*2609*/
 public class GCD_LCM {
 	/*
-		�� Greatest Common Divison : �ִ� �����
-			1. 1-N���� %���� O(N)
-			2. ��Ŭ���� ȣ����
-			 	a�� b�� ���� �������� r�̶�� �� ��
+		★ Greatest Common Divison : 최대 공약수
+			1. 1-N까지 %연산 O(N)
+			2. 유클리드 호제법
+			 	a를 b로 나눈 나머지를 r이라고 할 때
 				GCD(a, b) = GCD(b, r)
-				r�� 0�϶� b�� �ִ�����
-			������Լ� ����, while ���� ����
-			3. GCD(a, b, c) = GCD(GCD(a,b),c)�� �����Ѵ�.
-		�� Least Common Multiple : �ּ� �����
+				r이 0일때 b가 최대공약수
+			※재귀함수 구현, while 구현 가능
+			3. GCD(a, b, c) = GCD(GCD(a,b),c)를 만족한다.
+		★ Least Common Multiple : 최소 공배수
 	*/
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

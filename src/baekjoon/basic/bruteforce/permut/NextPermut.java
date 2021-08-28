@@ -16,7 +16,7 @@ public class NextPermut {
 		if(nextPermu2(nums))print2(nums);
 		else System.out.println(-1);
 	}
-	//���� ����ϰ� ¥ ���ô�!
+	//좀더 깔끔하게 짜 봅시다!
 	public static boolean nextPermu2(int[] nums) {
 		int i = nums.length-1;
 		while(i>0&&nums[i-1] >= nums[i]) {
@@ -37,10 +37,10 @@ public class NextPermut {
 		}
 		return true;
 	}
-	//ó�� § ��������
+	//처음 짠 다음순열
 	public static int nextPermu1(int [] nums) {
 		if(nums.length==1)return -1;
-		/*1. nums[i-1] <= nums[i]�� ������Ű�� ���� ū iã��*/
+		/*1. nums[i-1] <= nums[i]를 만족시키는 가장 큰 i찾기*/
 		int i;
 		for(i=nums.length-1;i>0;i--) {
 			if(nums[i-1] <= nums[i]) {
@@ -48,16 +48,16 @@ public class NextPermut {
 			}
 			if(i==1)return -1;
 		}
-		/*2. i<=j �̸� nums[i-1] <= nums[j]�� �����ϴ� ���� ū j ã��*/ 
+		/*2. i<=j 이며 nums[i-1] <= nums[j]를 만족하는 가장 큰 j 찾기*/ 
 		int j;
 		for(j=nums.length-1;j>=0;j--) {
 			if(i<=j && nums[i-1] <= nums[j]) {
 				break;
 			}
 		}
-		/*3. nums[i-1]�� nums[j]�� ����*/
+		/*3. nums[i-1]와 nums[j]를 스왑*/
 		swap(nums, i-1, j);
-		/*4. i�� �������� ������������ ����*/
+		/*4. i를 기준으로 오름차순으로 정렬*/
 		int[] tmpArr = new int[nums.length-i];
 		for(int k = i; k<nums.length; k++) {
 			tmpArr[k-i] = nums[k];

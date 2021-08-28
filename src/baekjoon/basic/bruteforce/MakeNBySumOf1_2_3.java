@@ -5,8 +5,8 @@ import java.util.Scanner;
 /*9095*/
 public class MakeNBySumOf1_2_3 {
 	/*
-	 * Ǯ�̹��
-	 * 	1. ���Ʈ ���� : 10�� for��
+	 * 풀이방법
+	 * 	1. 브루트 포스 : 10중 for문
 	 */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

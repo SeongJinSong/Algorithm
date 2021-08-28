@@ -3,7 +3,7 @@ package baekjoon.basic.bruteforce.recursive;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/*���� ���� ����ϰ� �ڵ带 ¥���� */
+/*좀더 쉽고 깔끔하게 코드를 짜보자 */
 public class MakeCipher2 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

@@ -7,8 +7,8 @@ public class l42577 {
 		String [] phone_book = {"119", "97674223", "1195524421"};
 		System.out.println(solution(phone_book));
 	}
-	/* ¾î¶»°Ô ¿Ö ÀÌ°É ÇØ½Ã¸¦ ½á¾ßÇÏ´ÂÁö ÀÌÇØ¸¦ ¸øÇßÀ½..
-	 * ³» ÈûÀ¸·Î Ç¬°Ô ¾Æ´Ï¶ó ´Ù½ÃÇ®¾î¾ßÇÔ */
+	/* ì–´ë–»ê²Œ ì™œ ì´ê±¸ í•´ì‹œë¥¼ ì¨ì•¼í•˜ëŠ”ì§€ ì´í•´ë¥¼ ëª»í–ˆìŒ..
+	 * ë‚´ í˜ìœ¼ë¡œ í‘¼ê²Œ ì•„ë‹ˆë¼ ë‹¤ì‹œí’€ì–´ì•¼í•¨ */
 	public static boolean solution(String[] phone_book) {
 		boolean answer = true;
 		HashMap<String, Integer> pb = new HashMap<String, Integer>();
@@ -24,7 +24,7 @@ public class l42577 {
 			}
 		return answer;
 	}
-	/* best solution ¿¡ ÀÖ´ø°Í */
+	/* best solution ì— ìˆë˜ê²ƒ */
 	public boolean solutionbest(String[] phoneBook) {
 	       for(int i=0; i<phoneBook.length-1; i++) {
 	            for(int j=i+1; j<phoneBook.length; j++) {
@@ -34,7 +34,7 @@ public class l42577 {
 	        }
 	        return true;
 	    }
-	/*Ã³À½ Ç®¾ú´ø Ç®ÀÌ*/
+	/*ì²˜ìŒ í’€ì—ˆë˜ í’€ì´*/
 	public static boolean solution1(String[] phone_book) {
 		boolean answer = true;
 		for(int i=0;i<phone_book.length;i++) {
@@ -59,7 +59,7 @@ public class l42577 {
 		}
         return answer;
     }
-	/*replace¸¦ ÀÌ¿ëÇÑ °ËÁõ¹æ½Ä*/
+	/*replaceë¥¼ ì´ìš©í•œ ê²€ì¦ë°©ì‹*/
 	public boolean solution2(String[] phone_book) {
         boolean answer = true;
         for(int i =0; i<phone_book.length; i++) {

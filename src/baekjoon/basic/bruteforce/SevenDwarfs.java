@@ -24,7 +24,7 @@ public class SevenDwarfs {
 						if(chk[k]==false)
 							System.out.println(dwarfs[k]);
 					}
-					//�̋� ������ ������ ���� 2�� �̻��϶� ������ ����.
+					//이떄 끝내지 않으면 답이 2개 이상일때 오류가 난다.
 					return;
 				}
 			}

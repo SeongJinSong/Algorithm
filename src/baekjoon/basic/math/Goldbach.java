@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*6588*/
 public class Goldbach {
 /*
- * 4���� ū ��� ¦���� �� Ȧ�� �Ҽ��� ������ ��Ÿ�� �� �ִ�.
+ * 4보다 큰 모든 짝수는 두 홀수 소수의 합으로 나타낼 수 있다.
  */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

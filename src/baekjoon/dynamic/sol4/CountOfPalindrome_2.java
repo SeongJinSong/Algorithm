@@ -1,7 +1,7 @@
 package baekjoon.dynamic.sol4;
 
 /*
-���� ����. �ڹ� ���ʷ� �� ������ Ǯ��. by �ֿ켮
+백준 저지. 자바 최초로 이 문제를 풀다. by 최우석
 */
 import java.io.*;
 import java.util.*;
@@ -30,8 +30,8 @@ public class CountOfPalindrome_2 {
        for (int i = 1; i <= K; i++) {
            for (int j = 0; j < N; j++) {
                ret += sol(i-w[j][0].length(),w[j][0],0);
-//               System.out.println("�Ӹ��帲 ���� : "+ i
-//               +" w[j]�� �ε��� j : " +j +" ����� �� : "+ret);
+//               System.out.println("팰린드림 길이 : "+ i
+//               +" w[j]의 인덱스 j : " +j +" 경우의 수 : "+ret);
                ret %= mod;
            }
        }
@@ -55,7 +55,7 @@ public class CountOfPalindrome_2 {
        Tuple key = new Tuple(n,s,pos);
        if(n < 0) return 0;
        if(isPalindrom(s) && n == 0) {
-//           System.out.println("���� s�� ���� : " + s);
+//           System.out.println("최종 s의 형태 : " + s);
            return 1;
        }
        if(hashMap.containsKey(key)) return hashMap.get(key);

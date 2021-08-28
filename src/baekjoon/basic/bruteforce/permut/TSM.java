@@ -20,7 +20,7 @@ public class TSM {
 		}
 		
 		do {
-			if(a[0]!=0)break;//���� Ư���� �������� 0�϶��� Ȯ���غ��� ������ ����!
+			if(a[0]!=0)break;//문제 특성상 시작점이 0일때만 확인해봐도 문제가 없다!
 			int sum = m[a[n-1]][a[0]];
 			boolean ok = true;
 			for(int i=0;i<n-1;i++) {

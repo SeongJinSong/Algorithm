@@ -15,7 +15,7 @@ public class FileCharsetUtil {
 	
 	public static void main(String[] args) {
 		System.out.println("=============== convert start ===============");
-		getFileList("C:/Users/admin/git/Algorithm/src", 0);		
+		getFileList("C:\\Users\\admin\\Desktop\\src".replaceAll("\\\\", "/"), 0);		
 		System.out.println("=============== convert end ===============");
 	}
 	
@@ -36,7 +36,7 @@ public class FileCharsetUtil {
 		};
 		File[] javalist = path.listFiles(javafilter);
 		for(File f : javalist) {
-			System.out.println(indent+"�꽩 javaname:"+f.getName());
+			System.out.println(indent+"name:"+f.getName());
 			try {
 				convertEncoding(f.getAbsolutePath(), f.getAbsolutePath());
 			} catch (Exception e) {
@@ -46,17 +46,11 @@ public class FileCharsetUtil {
 		}
 		File[] dirlist = path.listFiles(dirfilter);
 		for(File f : dirlist) {
-			System.out.println(indent+"dirname:"+f.getName());
+			System.out.println(indent+"dir:"+f.getName());
 			getFileList(f.getAbsolutePath(), depth+1);
 		}
 	}
 	 
-    /**
-     * UTF-8 encoding �뙆�씪�쓣 MS949 encoding �뙆�씪濡� 蹂�寃�
-     * @param inFileName UTF-8 �뙆�씪 議댁옱�쐞移�
-     * @param outFileName �깉濡� �깮�꽦�맆 MS949 �뙆�씪 ���옣�쐞移�
-     * @throws Exception
-     */
     public static void convertEncoding(String inFileName, String outFileName) throws Exception {
          
         // ================================
@@ -78,7 +72,6 @@ public class FileCharsetUtil {
         }
         reader.close();
          
-        //
         FileOutputStream fos = new FileOutputStream(outFileName);
         writer = new OutputStreamWriter(fos, "UTF-8");
         writer.write(stringBuffer.toString());

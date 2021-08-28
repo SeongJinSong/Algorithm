@@ -10,7 +10,7 @@ class LinearFunc {
     public LinearFunc(long a, long b) {
         this.a = a;
         this.b = b;
-        this.s = 0; // 0���� ����
+        this.s = 0; // 0과의 교점
     }
 
     public void getCross(LinearFunc l){

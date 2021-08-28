@@ -15,12 +15,12 @@ public class PracticeSeason_3 {
             C = Integer.parseInt(st.nextToken());D = Integer.parseInt(st.nextToken());
             d = Integer.parseInt(st.nextToken());
 
-            //x�� �Է�
+            //x팀 입력
             st = new StringTokenizer(br.readLine());
             x = new int[st.countTokens()];
             for (int j = 1; j < x.length; j++) x[j] = Integer.parseInt(st.nextToken());
 
-            //y�� �Է�
+            //y팀 입력
             st = new StringTokenizer(br.readLine());
             y = new int[st.countTokens()];
             for (int j = 1; j < y.length; j++) y[j] = Integer.parseInt(st.nextToken());
@@ -52,7 +52,7 @@ public class PracticeSeason_3 {
 
         int ret = Integer.MAX_VALUE;
 
-        //X,Y �Ѵ� ������ ���
+        //X,Y 둘다 연습할 경우
         if(xi < x.length && yi < y.length){
             if(x[xi] == y[yi]){
                 ret = sol(n+1, xi+1,yi+1,0,0)+C;
@@ -60,17 +60,17 @@ public class PracticeSeason_3 {
                 ret = sol(n+1, xi+1,yi+1,0,0)+2*C;
             }
         }
-        //X�� ����
+        //X만 연습
         if(xi < x.length) {
             int cost_rest= (sy == 1) ? d : D + d;
             ret = Math.min(sol(n+1,xi+1,yi,0,1)+cost_rest+C,ret);
         }
-        //Y�� ����
+        //Y만 연습
         if(yi < y.length) {
             int cost_rest = (sx == 1) ? d : D + d;
             ret = Math.min(sol(n+1,xi,yi+1,1,0)+cost_rest+C,ret);
         }
-        //�Ѵ� ���� ����
+        //둘다 연습 안함
         int cost_rest = 2*d;
         if(sx == 0) cost_rest += D;
         if(sy == 0) cost_rest += D;

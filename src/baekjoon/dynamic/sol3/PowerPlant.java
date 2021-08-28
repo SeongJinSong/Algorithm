@@ -28,9 +28,9 @@ public class PowerPlant {
         for (int i=0; i<(1<<n); i++) {
             if (d[i] == -1) continue;
             for (int j=0; j<n; j++) {
-                if ((i&(1<<j)) != 0) { // j�� ���� ����
+                if ((i&(1<<j)) != 0) { // j가 켜져 있음
                     for (int k=0; k<n; k++) {
-                        if ((i&(1<<k))==0) { // k�� ��������
+                        if ((i&(1<<k))==0) { // k가 꺼져있음
                             if (d[i|(1<<k)] == -1 || d[i|(1<<k)] > d[i] + a[j][k]) {
                                 d[i|(1<<k)] = d[i]+a[j][k];
                             }

@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*1929*/
 public class PrimeNumber2 {
 /*
- * �����佺�׳׽��� ü 
+ * 에라토스테네스의 체 
  */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

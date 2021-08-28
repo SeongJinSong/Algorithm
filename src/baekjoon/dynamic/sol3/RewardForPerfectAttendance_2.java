@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class RewardForPerfectAttendance_2 {
 	static int mod = 1000000;
 	static int d[][][][]= new int[1001][3][2][3];
-	// �⼮: 0, �Ἦ: 1, ����: 2
+	// 출석: 0, 결석: 1, 지각: 2
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();

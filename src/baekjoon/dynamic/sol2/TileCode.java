@@ -6,8 +6,8 @@ import java.math.*;
 public class TileCode {
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-        long[] a = new long[31]; // ��Ī ����
-        long[] d = new long[31]; // ��Ī ����
+        long[] a = new long[31]; // 대칭 포함
+        long[] d = new long[31]; // 대칭 없음
         a[1] = 1;
         a[2] = 3;
         for (int i=3; i<=30; i++) {

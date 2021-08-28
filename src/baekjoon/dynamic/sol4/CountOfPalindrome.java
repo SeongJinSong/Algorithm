@@ -1,6 +1,6 @@
 package baekjoon.dynamic.sol4;
 
-// ������ �����ε� Ȱ�� �� �ʹ� �ڹٿ� ���������� ��ŵ��
+// 연산자 오버로딩 활용 등 너무 자바와 동떨어져서 스킵함
 
 public class CountOfPalindrome {
 

@@ -36,7 +36,7 @@ public class ConnectedComponent {
 		
 		/*for(int i=1; i<n+1; i++) {
 			Collections.sort(a[i]);
-		}// ������� �켱 ���� ������ �������Ƿ� ��� �� �ʿ䰡 ����.*/		
+		}// 작은노드 우선 같은 조건이 없었으므로 사실 할 필요가 없다.*/		
 		int ans=0;
 		c = new boolean[n+1];
 		for(int i=1; i<n+1; i++) {
