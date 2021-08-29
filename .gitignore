@@ -16,6 +16,9 @@ local.properties
 .recommenders
 src/module-info.java
 
+## vscode
+.vscode
+
 # External tool builders
 .externalToolBuilders/
 
