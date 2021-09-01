@@ -19,6 +19,10 @@ src/module-info.java
 ## vscode
 .vscode
 
+# intellij
+.idea/
+out/
+
 # External tool builders
 .externalToolBuilders/
 
