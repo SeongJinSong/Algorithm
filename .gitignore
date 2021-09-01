@@ -22,6 +22,7 @@ src/module-info.java
 # intellij
 .idea/
 out/
+Algorithm.iml
 
 # External tool builders
 .externalToolBuilders/
