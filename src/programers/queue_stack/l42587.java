@@ -2,7 +2,7 @@ package programers.queue_stack;
 
 import java.util.ArrayList;
 
-public class ㅣ42587 {
+public class l42587 {
 	public static void main(String[] args) {
 		int[] priorities = {2, 1, 3, 2};
 		int location = 2;
