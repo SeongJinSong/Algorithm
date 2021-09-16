@@ -35,33 +35,29 @@ public class l42883 {
 	
 	/*그리디 알고리즘으로 풀어보자
 	 * 1개를 지웠을 때 가장 큰 수가되는 index를 찾아서 지워준다.
-	 * 그걸 k개까지 반복한다. --> 느림
+	 * 그걸 k개까지 반복한다.
 	 * 
 	 * 질문에서 실수로 first, second를 봐버림;
 	 * 1.다음에 올 숫자와 크기를 비교한다.
 	 * 2.다음꺼가 더 크면 현재를 지운다.
+	 * 
+	 * 이게 내가 생각하는 최고 효율적인 알고리즘인데 절대 풀리지 않았다.
+	 * 무슨짓을 해도 안풀렸는데 원인은 sb.toString()을 사용한 것이었다.
+	 * sb.charAt(i), sb.deleteCharAt(i), sb.length() 전부 사용 가능한 로직이었다;
+	 * toString을 사용하는게 이렇게까지 성능에 문제를 발생시킬거라곤 생각도 못했다.
 	 * */
 	public static String solution2(String number, int k) {
 		StringBuilder sb = new StringBuilder(number);
 		int index = 0;
-		while(k>0&&index<sb.toString().length()-1) {
-			/*처음에 짠 코드인데 O(n)이므로 테스트케이스 6~10성능테스트를 통과하지 못함
-			 	int idx=0;
-			 	for(int i=idx;i<sb.toString().length();i++) {
-					if(compare(sb, idx, i)<0){
-						idx=i;
-					}
-				}
-				sb.delete(idx, idx+1);
-			*/
-			if(	sb.toString().charAt(index)<sb.toString().charAt(index+1)) {
-				sb.delete(index, index+1);
+		while(k>0&&index<sb.length()-1) {
+			if(	sb.charAt(index)<sb.charAt(index+1)) {
+				sb.deleteCharAt(index);
 				index = index==0?0:index-1;
 				k--;
 			}
 			else index++;
 		}
-		return sb.delete(sb.toString().length()-k, sb.toString().length()).toString();
+		return sb.delete(sb.length()-k, sb.length()).toString();
     }
 	public static int compare(StringBuilder sb, int idx, int i) {
 		return new StringBuilder(sb).delete(idx, idx+1).toString().compareTo(new StringBuilder(sb).delete(i, i+1).toString());
