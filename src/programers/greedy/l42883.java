@@ -1,5 +1,6 @@
 package programers.greedy;
 
+import java.util.Stack;
 import java.util.TreeSet;
 
 public class l42883 {
@@ -59,7 +60,47 @@ public class l42883 {
 		}
 		return sb.delete(sb.length()-k, sb.length()).toString();
     }
-	public static int compare(StringBuilder sb, int idx, int i) {
-		return new StringBuilder(sb).delete(idx, idx+1).toString().compareTo(new StringBuilder(sb).delete(i, i+1).toString());
+	/* 스택을 사용한 솔루션
+	 * 테스트 해보니 삭제해야하는 문자가 많을 때 
+	 * sb.deleteCharAt을 사용하는거보다 스택이 더 빠르다.
+	 * */
+	public static String solution3(String number, int k) {
+		char[] result = new char[number.length()-k];
+		Stack<Character> stack = new Stack<Character>();
+		for(int i=0;i<number.length();i++) {
+			char c = number.charAt(i);
+			while(!stack.isEmpty()&&stack.peek() < c&& k-->0) {
+				stack.pop();
+			}
+			stack.push(c);
+		}
+		for(int i=0;i<result.length;i++) {
+			result[i] = stack.get(i);
+		}
+		return new String(result);
+	}
+	
+	/*특이한 풀이방식이라 가져와 봤다.*/
+	public static String solution4(String number, int k) {
+		StringBuilder sb = new StringBuilder();
+		int cnt = number.length()-k;	// 선택해야하는 숫자
+		int left = 0;
+		int right = k; //최대값을 찾을 범위
+		int max = -1;
+		int idx = 0;
+		while(cnt>0) {
+			max = -1;
+			// left와 right 사이의 최대값
+			for(int i=left;i<=right;i++) {
+				if(number.charAt(i)-'0' > max) {
+					idx=i;
+					max = number.charAt(i)-'0';
+				}
+			}
+			sb.append(number.charAt(idx));
+			left = idx+1; //시작점은 이전 max값 index의 다음부터
+			right = number.length()- --cnt; // 선택해야하는 숫자가 줄을수록 뒤에까지 삭제가능
+		}
+		return sb.toString();
 	}
 }
