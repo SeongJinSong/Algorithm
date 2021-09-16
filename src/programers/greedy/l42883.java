@@ -61,8 +61,7 @@ public class l42883 {
 			}
 			else index++;
 		}
-		if(k==1)return sb.delete(1, 2).toString();
-		return sb.toString();
+		return sb.delete(sb.toString().length()-k, sb.toString().length()).toString();
     }
 	public static int compare(StringBuilder sb, int idx, int i) {
 		return new StringBuilder(sb).delete(idx, idx+1).toString().compareTo(new StringBuilder(sb).delete(i, i+1).toString());
