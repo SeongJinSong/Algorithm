@@ -59,4 +59,19 @@ public class l42897 {
 		}
 		return max;
 	}
+	/*점화식을 조금더 좁은 범위로 만들었으면 풀이가 쉬웠을 것이다.*/
+	public static int solution2(int[] money) {
+		//1. 처음 집을 선택한 경우
+		int[] dp = new int[money.length];
+		dp[0] = dp[1] = money[0];
+		//2. 처음 집을 선택하지 않은 경운
+		int[] dp2 = new int[money.length];
+		dp2[1] = money[1];
+		
+		for(int i=2;i<dp.length;i++) {
+			dp[i]=Math.max(dp[i-2]+money[i], dp[i-1]);
+			dp2[i]=Math.max(dp2[i-2]+money[i], dp2[i-1]);
+		}
+		return Math.max(dp[dp.length-2], dp2[dp2.length-1]);
+	}
 }
