@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import programers.dfs_bfs.l43163.Word;
 
 public class l43163 {
 	public static void main(String[] args) {
@@ -82,4 +90,124 @@ public class l43163 {
 		}
 		return true;
 	}
+	
+	/* Stream을 극한으로 활용한 사례인것 같아서 가져왔다*/
+	public int solution3(String begin, String target, String[] words) {
+        return Arrays.stream(words)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Words::from))
+                .calculateMinConversionCount(begin, target);
+    }
+
+    private static class Words {
+        private final List<Word2> words;
+        private final Map<Word2, Boolean> usedWords;
+
+        public Words(List<Word2> words) {
+            this.words = words;
+            this.usedWords = words.stream()
+                    .collect(Collectors.toMap(Function.identity(), word -> Boolean.FALSE));
+        }
+
+        public static Words from(List<String> words) {
+            List<Word2> words1 = words.stream()
+                    .map(Word2::new)
+                    .collect(Collectors.toList());
+
+            return new Words(words1);
+        }
+
+        public Integer calculateMinConversionCount(String begin, String target) {
+        	Word2 word = new Word2(begin);
+        	Word2 targetWord = new Word2(target);
+
+            MinCount minCount = new MinCount();
+            calculateMinConversionCount(word, targetWord, 0, minCount);
+
+            if (minCount.isDefaultCount()) {
+                return 0;
+            }
+
+            return minCount.getCount();
+        }
+
+        private void calculateMinConversionCount(Word2 word, Word2 targetWord, Integer count, MinCount minCount) {
+            if (word.equals(targetWord)) {
+                minCount.updateMin(count);
+            }
+
+            List<Word2> nextWords = getNextWords(word);
+
+            if (nextWords.isEmpty() || minCount.isLessEqualsThan(count)) {
+                return;
+            }
+
+            for (Word2 from : nextWords) {
+                this.usedWords.put(from, Boolean.TRUE);
+                calculateMinConversionCount(from, targetWord, count + 1, minCount);
+                this.usedWords.put(from, Boolean.FALSE);
+            }
+        }
+
+        private List<Word2> getNextWords(Word2 from) {
+            return this.words.stream()
+                    .filter(to -> this.isConvertible(from, to))
+                    .collect(Collectors.toList());
+        }
+
+        private boolean isConvertible(Word2 from, Word2 to) {
+            return !this.usedWords.get(to) && from.isConvertibleTo(to);
+        }
+    }
+
+    private static class Word2 {
+        private final String word;
+
+        public Word2(String word) {
+            this.word = word;
+        }
+
+        public boolean isConvertibleTo(Word2 word) {
+            return IntStream.range(0, this.word.length())
+                    .filter(index -> this.word.charAt(index) != word.word.charAt(index))
+                    .count() == 1L;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Word word1 = (Word) o;
+            return Objects.equals(word, word1.word);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(word);
+        }
+    }
+
+    private static class MinCount {
+        private static final Integer DEFAULT_COUNT = Integer.MAX_VALUE;
+        private Integer count;
+
+        public MinCount() {
+            this.count = DEFAULT_COUNT;
+        }
+
+        public void updateMin(Integer count) {
+            this.count = Integer.min(this.count, count);
+        }
+
+        public Integer getCount() {
+            return count;
+        }
+
+        public boolean isDefaultCount() {
+            return DEFAULT_COUNT.equals(this.count);
+        }
+
+        public boolean isLessEqualsThan(Integer count) {
+            return this.count <= count;
+        }
+    }
 }
