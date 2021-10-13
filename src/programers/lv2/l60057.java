@@ -27,6 +27,7 @@ public class l60057 {
         			if(appendIdx+size>=s.length()) {
         				appendIdx+=size;
         				sb.append(cnt+cur);
+        				cnt=1;
         			}
         		}
         		else {
@@ -44,6 +45,7 @@ public class l60057 {
         			
         		}
         	}
+        	if(cnt!=1)sb = new StringBuilder().append(cnt).append(sb);
         	sb.append(s.substring(appendIdx));
         	if(sb.length()!=0&&answer>sb.length())answer = sb.length();
         	sb = new StringBuilder();
