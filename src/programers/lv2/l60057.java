@@ -13,52 +13,41 @@ public class l60057 {
         int answer = s.length();
         int size = 1;
         while(size<=s.length()/2) {
-        	System.out.println("---- size:"+size);
         	StringBuilder sb = new StringBuilder();
-        	int idx = 0;
-        	int i;
+        	int curIdx = 0; // 현재 압축 기준이 되는 idx
+        	int appendIdx; //압축 스트링에 넣은 idx
         	int cnt = 1;
-        	for(i=idx;i+size<s.length();) {
-        		String cur = s.substring(idx, idx+size);
-        		if(i+size+size>s.length())break;
-        		String next = s.substring(i+size,i+size+size);
-        		System.out.print("idx:"+idx);
-        		System.out.print(" i:"+i);
-        		System.out.print(" cur:"+cur);
-        		System.out.println(" next: "+next);
+        	for(appendIdx=curIdx;appendIdx+size<s.length();) {
+        		String cur = s.substring(curIdx, curIdx+size);
+        		if(appendIdx+2*size>s.length())break;
+        		String next = s.substring(appendIdx+size,appendIdx+size+size);
         		if(cur.equals(next)) {
         			cnt++;
-        			i+=size;
-        			if(i+size>=s.length()) {
-        				i+=size;
+        			appendIdx+=size;
+        			if(appendIdx+size>=s.length()) {
+        				appendIdx+=size;
         				sb.append(cnt+cur);
-        				System.out.println("sb.toString():"+sb.toString());
         			}
         		}
         		else {
         			if(cnt!=1) {
         				sb.append(cnt+cur);
-        				System.out.println("sb : "+sb.toString());
-        				idx+=cnt*size;
-        				i=idx;
+        				curIdx+=cnt*size;
+        				appendIdx=curIdx;
         				cnt=1;
         			}
         			else {
-        				sb.append(s.charAt(idx));
-        				System.out.println("sb2 : "+sb.toString());
-        				idx++;
-        				i=idx;
+        				sb.append(s.charAt(curIdx));
+        				curIdx++;
+        				appendIdx=curIdx;
         			}
         			
         		}
         	}
-        	System.out.print("i: "+i);
-        	sb.append(s.substring(i));
-        	System.out.println(" result sb:"+sb.toString());
+        	sb.append(s.substring(appendIdx));
         	if(sb.length()!=0&&answer>sb.length())answer = sb.length();
         	sb = new StringBuilder();
         	size++;
-        	
         }
         return answer;
     }
