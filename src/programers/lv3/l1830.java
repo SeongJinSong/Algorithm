@@ -1,13 +1,17 @@
 package programers.lv3;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class l1830 {
 	public static void main(String[] args) {
 //		String sentence = "HaEaLaLaObWORLDb";
 //		String sentence = "SpIpGpOpNpGJqOqA";
 //		String sentence = "AxAxAxAoBoBoB";
-//		String sentence = "AbAaAbAaCa";
+//		String sentence = "AbAaAbAaCa"; //invalid
 //		String sentence = "aIaAM";
 //		String sentence = "AAAaBaAbBBBBbCcBdBdBdBcCeBfBeGgGGjGjGRvRvRvRvRvR";
 //		String sentence = "aaA";
@@ -26,7 +30,7 @@ public class l1830 {
 		
 	}
 	String err = "invalid";
-	HashMap<Integer, String> hm2;
+	ConcurrentHashMap<Integer, String> hm2;
 	public String solution(String sentence) {
 		/* 1. 띄어쓰기 case insert
 		 * 규칙 2 확인
@@ -56,7 +60,7 @@ public class l1830 {
 				hm.put((int)sentence.charAt(i), hm.getOrDefault((int)sentence.charAt(i), 0)+1);
 			}
 		}
-		hm2 = new HashMap<Integer, String>();
+		hm2 = new ConcurrentHashMap<Integer, String>();
 		for(int i : hm.keySet()) {
 			if(hm.get(i)==2) {
 				tmp=restoreRule2(tmp, (char)i);
@@ -96,7 +100,7 @@ public class l1830 {
 		int end = sentence.lastIndexOf(c)+1;
 		boolean toggle = true;
 		StringBuilder sb = new StringBuilder();
-		System.out.println("start:"+start+"sentence.charAt(start-1):"+sentence.charAt(start-1));
+//		System.out.println("start:"+start+" sentence.charAt(start-1):"+sentence.charAt(start-1));
 		if(start>0&&' '==sentence.charAt(start-1))return err;
 		
 		for(int i=start; i<=end;i++) {
@@ -109,6 +113,7 @@ public class l1830 {
 				sb.append(sentence.charAt(i));
 			}
 			else {
+//				System.out.println("rule1 err");
 				return err;
 			}
 		}
@@ -119,29 +124,115 @@ public class l1830 {
 				+sb.toString()
 				+(end==sentence.length()-1||' '==sentence.charAt(end+1)?"":" ")
 				+sentence.substring(end+1, sentence.length());
-		System.out.println("s:"+s);
+//		System.out.println("s:"+s);
 		return s;
 	}
 	public String restoreRule2(String sentence, char c) {
+		System.out.println("rule2 char:"+c+" sentence:"+sentence);
+		int spaceCnt=0;
+		for(int i=0;i<sentence.length();i++) {
+			if(sentence.charAt(i)==' ')spaceCnt++;
+		}
 		int start = sentence.indexOf(c);
 		int end = sentence.lastIndexOf(c);
-		if(hm2.isEmpty())hm2.put((int)c, start+" "+end);
+		if(hm2.isEmpty()) {
+			System.out.println("isEmpty start:"+ start+" end:"+end);
+			hm2.put((int)c, start+" "+end);
+		}
 		else {
-			for(String s:hm2.values()) {
-				int tmpStart = Integer.valueOf(s.split(" ")[0]);
-				int tmpEnd = Integer.valueOf(s.split(" ")[1]);
-				if(tmpStart>end||tmpEnd<start)hm2.put((int)c, start+" "+end);
-				else return err;
+			for(int i:hm2.keySet()) {
+				System.out.println("i:"+i);
+				int tmpStart = Integer.valueOf(hm2.get(i).split(" ")[0]);
+				int tmpEnd = Integer.valueOf(hm2.get(i).split(" ")[1]);
+				System.out.println("tmpStart:"+tmpStart+" end:"+end+" tmpEnd:"+tmpEnd+" start:"+start);
+				if(tmpStart>end+spaceCnt||tmpEnd<start+spaceCnt)hm2.put((int)c, start+" "+end);
+				else if(tmpStart==start&&tmpEnd==end) continue;
+				else {
+//					System.out.println("rule2 err");
+					return err;
+				}
 			}
 		}
-		if(sentence.substring(start+1, end-1).matches("^[a-z]*$"))return err;
 		if(start==end-1)return err;
 		StringBuilder sb = new StringBuilder();
 		sb.append(sentence.substring(0, start));
 		if(start>0&&' '!=sentence.charAt(start-1))sb.append(' ');
 		sb.append(sentence.substring(start+1, end));
-		if(end!=sentence.length()-1)sb.append(" ");
+		if(end!=sentence.length()-1) {
+			sb.append(" ");
+		}
 		sb.append(sentence.substring(end+1, sentence.length()));
+		return sb.toString();
+	}
+	public String solution2(String sentence) {
+		String invalid = "invalid";
+		try {
+			/*기호 종류, 위치 파악*/
+			char s[]=sentence.toCharArray(), ch;
+			int l = s.length, i;
+			LinkedHashMap<Character, List<Integer>> hm = new LinkedHashMap<>();
+			for(i=0;i<l;i++) {
+				ch=s[i];
+				if(ch>='a' && ch<='z') {
+					if(!hm.containsKey(ch)) hm.put(ch, new ArrayList<>());
+					hm.get(ch).add(i);
+				}
+			}
+			StringBuilder sb = new StringBuilder();
+			int iss=0, isw=0, iew=0, iswp = -1, iewp = -1, isc, iec, iscp=-1, iecp=-1, n,d,r=0;
+			List<Integer> ps;
+			for(char c : hm.keySet()) {
+				ps = hm.get(c);
+				n = ps.size();
+				isc = ps.get(0);
+				iec = ps.get(n-1);
+				if(n==1 || n>=3) {
+					for(i=1;i<n;i++)
+						if(ps.get(i)-ps.get(i-1)!=2) return invalid;
+				}else if(n==2) {
+					d = iec-isc;
+					if(d==2&&(iscp < isc && iec <iecp)) r=1;
+					else if(d>=2) r=2;
+					else return invalid;
+				}
+				
+				if(r==1) {
+					isw = isc-1;
+					iew = iec+1;
+					if(iswp < isw && iew < iewp) {
+						if(isc - iscp ==2 && iecp -iec ==2) continue;
+						else return invalid;
+					}
+				}
+				else if(r==2) {
+					isw = isc;
+					iew = iec;
+					if(iswp < isw && iew < iewp) return invalid;
+				}
+				
+				if(iewp >= isw) return invalid;
+				if(iss < isw) sb.append(getStr(s, iss, isw -1)+" ");
+				sb.append(getStr(s, isw, iew)+ " ");
+				iswp = isw;
+				iewp = iew;
+				iscp = isc;
+				iecp = iec;
+				iss = iew+1;
+			}
+			if(iss<1) sb.append(getStr(s, iss, l-1));
+			String str = sb.toString();
+			return str.trim();
+		}catch(Exception e) {
+			return invalid;
+		}
+	}
+	public String getStr(char s[], int is, int ie) {
+		StringBuilder sb = new StringBuilder();
+		char c;
+		for(int i=is; i<=ie; ++i) {
+			c=s[i];
+			if(c>='A' && c<='Z') sb.append(c);
+		}
 		return sb.toString();
 	}
 }
