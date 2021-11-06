@@ -1,13 +1,14 @@
 package programers.lv1;
 
-import java.util.HashMap;
-
 public class l67256 {
 	public static void main(String[] args) {
 		int[] numbers= {1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5}; String hand="right"; //"LRLLLRLLRRL"
-//		int[] numbers= {7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2}; String hand="left"; //"LRLLRRLLLRR"
-//		int[] numbers= {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}; String hand=	"right"; //"LLRLLRLLRL"
+		int[] numbers1= {7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2}; String hand1="left"; //"LRLLRRLLLRR"
+		int[] numbers2= {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}; String hand2="right"; //"LLRLLRLLRL"
+//		int[] numbers= {4, 3, 2, 8}; String hand=	"right"; //"LLRLLRLLRL"
 		System.out.println(new l67256().solution(numbers, hand));
+		System.out.println(new l67256().solution(numbers1, hand1));
+		System.out.println(new l67256().solution(numbers2, hand2));
 	}
 	public String solution(int[] numbers, String hand) {
 		//         1  2  3  4  5  6  7  8  9  *  0  #
@@ -48,7 +49,6 @@ public class l67256 {
         return sb.toString();
     }
 	public int getDiff(int prev, int numbers, int[] x, int[] y) {
-		if(prev==0)prev=10;
 		if(numbers==0)numbers=10;
 		else numbers--;
 		return Math.abs(x[prev]-x[numbers])+Math.abs(y[prev]-y[numbers]);
