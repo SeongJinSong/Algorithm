@@ -1,5 +1,7 @@
 package programers.lv2;
 
+import java.util.Stack;
+
 public class l12973 {
 	public static void main(String[] args) {
 		String s = "baabaa";
@@ -27,5 +29,20 @@ public class l12973 {
             }
         }
         return 1;
+    }
+	// 스택으로 풀면 되는 간단한 문제를 순간 생각하지 못하고 뻘짓을 했다;;;
+	public int solution2(String s)
+    {
+        Stack<Character> stk = new Stack<Character>();
+        for(int i=0;i<s.length();i++){
+            if(stk.isEmpty()){
+                stk.push(s.charAt(i));
+                continue;
+            }
+            if(stk.peek()==s.charAt(i))stk.pop();
+            else stk.push(s.charAt(i));
+        }
+        if(stk.isEmpty()) return 1;
+        return 0;
     }
 }
