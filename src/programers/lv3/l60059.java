@@ -18,8 +18,7 @@ public class l60059 {
 		
 		int[][] tmpBigArr = new int[OrgBigArr.length][OrgBigArr.length];
 		for(int r=0;r<4;r++) {
-			if(r==0)continue;
-			else key = rotation90(key);
+			if(r!=0)key = rotation90(key);
 			for(int i=0;i<OrgBigArr.length-kl;i++) {
 				for(int j=0;j<OrgBigArr.length-kl;j++) {
 					initArr(tmpBigArr, OrgBigArr);
