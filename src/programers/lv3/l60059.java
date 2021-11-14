@@ -19,8 +19,8 @@ public class l60059 {
 		int[][] tmpBigArr = new int[OrgBigArr.length][OrgBigArr.length];
 		for(int r=0;r<4;r++) {
 			if(r!=0)key = rotation90(key);
-			for(int i=0;i<OrgBigArr.length-kl;i++) {
-				for(int j=0;j<OrgBigArr.length-kl;j++) {
+			for(int i=0;i<OrgBigArr.length-kl+1;i++) {
+				for(int j=0;j<OrgBigArr.length-kl+1;j++) {
 					initArr(tmpBigArr, OrgBigArr);
 					addkey(tmpBigArr, key, i, j);
 					if(checkfit(tmpBigArr, kl, ll))return true;
