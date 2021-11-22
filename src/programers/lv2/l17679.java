@@ -1,6 +1,8 @@
 package programers.lv2;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class l17679 {
 	public static void main(String[] args) {
@@ -19,6 +21,7 @@ public class l17679 {
         while(erase(pan, m, n)){
             for(int i=0;i<n;i++){
                 down(pan, m, n, i);
+                print(pan);
             }
         }
         return answer;
@@ -51,27 +54,24 @@ public class l17679 {
         return arr.size()>0;
     }
     public void down(char[][] pan, int m, int n, int selectedCol){
-        int start=-1;
-        int gap=-1;
-        for(int i=m-1;i>0;i--){
-            if(pan[i][selectedCol]==' '){
-                start = i;
-                int r = findNotBlankRow(pan, i, selectedCol);
-                if(r==-1)return;
-                gap = i-r;
-                break;
+        Queue<Character> q = new LinkedList<Character>();
+        for(int i=m-1;i>=0;i--){
+            if(pan[i][selectedCol]!=' '){
+                q.add(pan[i][selectedCol]);
             }
+            pan[i][selectedCol]=' ';
         }
-        if(start==-1||gap==-1)return;
-        for(int i=start;i>=gap;i--){
-            pan[i][selectedCol]=pan[i-gap][selectedCol];
+        for(int i=m-1;i>=0;i--){
+        	if(q.isEmpty())break;
+        	pan[i][selectedCol]=q.poll();
         }
     }
-    public int findNotBlankRow(char[][] pan, int row, int selectedCol){
-        for(int i=row-1;i>=0;i--){
-            if(pan[i][selectedCol]==' ')continue;
-            else return i;
-        }
-        return -1;
+    public void print(char[][] pan) {
+    	for(int i=0;i<pan.length;i++) {
+    		for(int j=0;j<pan[i].length;j++) {
+    			System.out.print(pan[i][j]+" ");
+    		}
+    		System.out.println();
+    	}
     }
 }
