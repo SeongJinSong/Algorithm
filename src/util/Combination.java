@@ -1,4 +1,4 @@
-package util.comb;
+package util;
 
 public class Combination {
 	
