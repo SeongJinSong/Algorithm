@@ -3,33 +3,52 @@ package baekjoon.random;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class p2493 {
+	static class Node{
+		int idx;
+		int height;
+		Node(int idx, int height){
+			this.idx=idx;
+			this.height=height;
+		}
+	}
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int n = Integer.parseInt(br.readLine());
 		StringTokenizer tk = new StringTokenizer(br.readLine());
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		while(n-->0) {
-			a.add(Integer.parseInt(tk.nextToken()));
-		}
+		Stack<Node> stk = new Stack<Node>();
 		ArrayList<Integer> res = new ArrayList<Integer>();
-		res.add(0);
-		int max = a.get(0);
-		for(int i=1;i<a.size();i++) {
-			if(max<a.get(i)) {
-				max=a.get(i);
+		int idx=1;
+		int max=0;
+		int maxIdx=1;
+		while(tk.hasMoreTokens()) {
+			int next = Integer.parseInt(tk.nextToken());
+			if(stk.isEmpty()) {
 				res.add(0);
-				continue;
+				stk.add(new Node(idx, next));
+				max=next;
+				maxIdx=idx;
 			}
-			for(int j=i-1;j>=0;j--) {
-				if(a.get(j)>a.get(i)) {
-					res.add(j+1);
-					break;
-				}
-				else if(j==0) res.add(0);
+			else if(max<next) {
+				stk.clear();
+				max = next;
+				maxIdx=idx;
+				stk.push(new Node(idx, next));
+				res.add(0);
 			}
+			else if(stk.peek().height<next) {
+				while(stk.peek().height<next)stk.pop();
+				res.add(stk.peek().idx);
+				stk.add(new Node(idx, next));
+			}
+			else {
+				res.add(stk.peek().idx);
+				stk.add(new Node(idx, next));
+			}
+			idx++;
 		}
 		for(int i:res)System.out.print(i+" ");
 	}
