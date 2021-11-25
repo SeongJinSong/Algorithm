@@ -33,6 +33,7 @@ public class l67257 {
 				System.out.println("bIdx: "+bIdx);
 				i=bIdx+1;
 				lastbIdx=i;
+				i--;
 				System.out.println(sb.toString());
 			}
 		}
@@ -52,9 +53,6 @@ public class l67257 {
 			return String.valueOf(f2+b2);
 		case '-':
 			System.out.println("expression:"+expression+" fIdx:"+fIdx+" i:"+i+" bIdx:"+ bIdx);
-			if(fIdx==i) {
-				return expression.substring(i, bIdx);
-			}
 			int f3 = Integer.valueOf(expression.substring(fIdx, i));
 			int b3 = Integer.valueOf(expression.substring(i+1, bIdx>len?len:bIdx));
 			return String.valueOf(f3-b3);
