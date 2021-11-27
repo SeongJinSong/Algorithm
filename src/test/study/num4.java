@@ -17,13 +17,15 @@ public class num4 {
 			int maxHeight=0;
 			// 아래 있는 것 j
 			for(int j=0;j<i;j++) {
-				if(rectangles[i][0]<=rectangles[j][2]&&rectangles[j][2]<=rectangles[i][2]) {
+				if(rectangles[i][0]<rectangles[j][2]&&rectangles[j][2]<rectangles[i][2]) {
 					if(maxHeight<rectangles[j][3]) {
 						maxHeight=rectangles[j][3];
+						System.out.println("1 i:"+i+" j:"+j+" maxH:"+maxHeight);
 					}
-				}else if(rectangles[j][0]<=rectangles[i][2]&&rectangles[i][2]<=rectangles[j][2]) {
+				}else if(rectangles[j][0]<rectangles[i][2]&&rectangles[i][2]<rectangles[j][2]) {
 					if(maxHeight<rectangles[j][3]) {
 						maxHeight=rectangles[j][3];
+						System.out.println("2 i:"+i+" j:"+j+" maxH:"+maxHeight);
 					}
 				}
 			}
@@ -31,6 +33,17 @@ public class num4 {
 			rectangles[i][1]-=a+maxHeight;
 			rectangles[i][3]-=a+maxHeight;
 		}
+		String[] r1 = new String[rectangles.length];
+		for(int i=0;i<rectangles.length;i++) {
+        	StringBuilder sb = new StringBuilder();
+        	for(int j=0;j<4;j++) {
+        		sb.append(rectangles[i][j]);
+        		if(j!=3)sb.append(" ");
+        	}
+        	r1[i]=sb.toString();
+        }
+		prints(r1);
+		System.out.println();
 		Arrays.sort(rectangles, (a, b)->a[2]-b[2]);
 		for(int i=0;i<rectangles.length;i++) {
 			int maxWidth=0;
@@ -42,7 +55,8 @@ public class num4 {
 					}
 				}else if(rectangles[j][1]<=rectangles[i][3]&&rectangles[i][3]<=rectangles[j][3]) {
 					if(maxWidth<rectangles[j][2]) {
-						maxWidth=rectangles[j][2];
+						maxWidth=rectangles[j][
+						                       2];
 					}
 				}
 			}
@@ -63,7 +77,7 @@ public class num4 {
     }
 	
 	public void prints(String[] arr) {
-		for(String s : arr)System.out.print(s+" ");
+		for(String s : arr)System.out.print(s+", ");
 		System.out.println();
 	}
 }
