@@ -1,4 +1,4 @@
-package compony.line;
+package test.study;
 
 import java.util.HashMap;
 import java.util.LinkedList;
