@@ -3,7 +3,9 @@ package programers.lv2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 
 public class l72411 {
 	public static void main(String[] args) {
@@ -90,5 +92,44 @@ public class l72411 {
 	public void print(String[] arr) {
 		for(String s : arr)System.out.print(s+" ");
 		System.out.println();
+	}
+	/*각 order마다 조합을 구한후 map에서 count를 추가한다.*/
+	static HashMap<String, Integer> map;
+	static int m;
+	public String[] solution2(String[] orders, int[] course) {
+		PriorityQueue<String> pq = new PriorityQueue<String>();
+		for(int i=0;i<course.length;i++) {
+			map = new HashMap<String, Integer>();
+			m=0;
+			for(int j=0;j<orders.length;j++) {
+				find(0,"",course[i], 0, orders[j]);
+			}
+			for(String s: map.keySet()) {
+				if(map.get(s)==m&&m>1) {
+					pq.offer(s);
+				}
+			}
+		}
+		String ans[] = new String[pq.size()];
+		int k=0;
+		while(!pq.isEmpty()) {
+			ans[k++]=pq.poll();
+		}
+		return ans;
+	}
+	static void find(int cnt, String str, int targetNum, int idx, String word) {
+		if(cnt==targetNum) {
+			char[] c = str.toCharArray();
+			Arrays.sort(c);
+			String temps="";
+			for(int i=0;i<c.length;i++)temps+=c[i];
+			map.put(temps, map.getOrDefault(temps, 0)+1);
+			m=Math.max(m, map.get(temps));
+			return;
+		}
+		for(int i=idx; i<word.length();i++) {
+			char now = word.charAt(i);
+			find(cnt+1, str+now, targetNum, i+1, word);
+		}
 	}
 }
