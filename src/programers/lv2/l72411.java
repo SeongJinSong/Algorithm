@@ -12,11 +12,11 @@ public class l72411 {
 		new l72411().print(new l72411().solution(orders, course));
 	}
 	class Course{
-		String s;
+		StringBuilder sb;
 		int len;
 		int cnt;
-		public Course(String s, int len, int cnt) {
-			this.s=s;
+		public Course(StringBuilder sb, int len, int cnt) {
+			this.sb=sb;
 			this.len=len;
 			this.cnt=cnt;
 		}
@@ -47,7 +47,7 @@ public class l72411 {
 				if(max<nd.cnt)max=nd.cnt;
 			}
 			for(Course nd : res) {
-				if(max==nd.cnt)result.add(nd.s);
+				if(max==nd.cnt)result.add(nd.sb.toString());
 			}
 		}
 		Collections.sort(result);
@@ -60,6 +60,7 @@ public class l72411 {
 			for(int i=0;i<visited.length;i++) {
 				if(visited[i])sb.append(a.get(i));
 			}
+			if(hs.contains(sb.toString()))return;
 			for(int i=0;i<orders.length;i++) {
 				int len=0;
 				for(int j=0;j<n;j++) {
@@ -69,9 +70,9 @@ public class l72411 {
 				}
 				if(len==r)cnt++;
 			}
-			if(cnt>1&&!hs.contains(sb.toString())) {
+			if(cnt>1) {
 				hs.add(sb.toString());
-				res.add(new Course(sb.toString(), r, cnt));
+				res.add(new Course(sb, r, cnt));
 			}
 			return;
 		}
