@@ -9,7 +9,8 @@ import java.util.Iterator;
 public class l42890 {
 	public static void main(String[] args) {
 //		String[][] relation= {{"100","ryan","music","2"},{"200","apeach","math","2"},{"300","tube","computer","3"},{"400","con","computer","4"},{"500","muzi","music","3"},{"600","apeach","music","2"}};
-		String[][] relation= { {"a","1","aaa","c","ng"},{"a","1","bbb","e","g"},{"c","1","aaa","d","ng"},{"d","2","bbb","d","ng"}};
+//		String[][] relation= { {"a","1","aaa","c","ng"},{"a","1","bbb","e","g"},{"c","1","aaa","d","ng"},{"d","2","bbb","d","ng"}};
+		String[][] relation= {{"100","ryan","music","2"},{"100","apeach","music","2"},{"300","ryan","computer","3"}};
 		System.out.println(new l42890().solution(relation));
 	}
 	HashSet<String> hs = new HashSet<>();
