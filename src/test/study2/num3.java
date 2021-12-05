@@ -14,23 +14,61 @@ public class num3 {
 	}
 	class Score{
 		String subject;
-		int grade;
+		Grade grade;
 		int idx;
-		public Score(String subject, int grade, int idx) {
+		public Score(String subject, Grade grade, int idx) {
 			this.subject=subject;
 			this.grade=grade;
 			this.idx=idx;
+		}
+	}
+	enum Grade{
+		A1("A+",1), A2("A0",2), A3("A-",2),
+		B1("B+",4), B2("B0",5), B3("B-",6),
+		C1("C+",7), C2("C0",8), C3("C-",9),
+		D1("D+",10), D2("D0",11), D3("D-",12)
+		,F("F", 13), NaN("Nan", -1);
+		private String grade;
+		private int order;
+		Grade(String grade, int order){
+			this.grade=grade;
+			this.order=order;
+		}
+		Grade(String grade){
+			this.grade=grade;
+			for(Grade d : Grade.values()) {
+				if(grade.equals(d.grade)) {
+					this.order=d.order;
+				};
+			}
+		}
+		public String getGrade() {
+			return grade;
+		}
+		public int getOrder() {
+			return order;
+		}
+		//Grade.of만으로 enum값을 세팅하려면 이 함수를 static으로 만들어야한다.
+		public static Grade of(String grade) {
+			for(Grade d : Grade.values()) {
+				if(grade.equals(d.grade)) {
+					return d;
+				};
+			}
+			return null;
 		}
 	}
 	public String[] solution(String[] grades) {
         ArrayList<String> answer = new ArrayList<String>();
         ArrayList<Score> arr = new ArrayList<Score>();
         for(int i=0;i<grades.length;i++) {
-        	arr.add(new Score(grades[i].split(" ")[0], convertInt(grades[i].split(" ")[1]), i));
+        	//Grade.NaN 이런식으로 써야 ENUM 객체가 생성된다.
+        	//Grade.of로 사용하려면 static 변수로 만들어야 한다.
+        	arr.add(new Score(grades[i].split(" ")[0], Grade.of(grades[i].split(" ")[1]), i));
         }
         Collections.sort(arr, (a,b)->{
-        	if(a.grade!=b.grade) {
-        		return a.grade-b.grade;
+        	if(a.grade.getOrder()!=b.grade.getOrder()) {
+        		return a.grade.getOrder()-b.grade.getOrder();
         	}
         	return a.idx-b.idx;
         });
@@ -38,73 +76,10 @@ public class num3 {
         for(Score sc : arr) {
         	if(hs.contains(sc.subject)) continue;
         	hs.add(sc.subject);
-        	answer.add(sc.subject+" "+convertStr(sc.grade));
+        	answer.add(sc.subject+" "+sc.grade.getGrade());
         }
-        
         return answer.stream().toArray(String[]::new);
     }
-	public int convertInt(String s) {
-		switch(s) {
-		case "A+":
-			return 1;
-		case "A0":
-			return 2;
-		case "A-":
-			return 3;
-		case "B+":
-			return 4;
-		case "B0":
-			return 5;
-		case "B-":
-			return 6;
-		case "C+":
-			return 7;
-		case "C0":
-			return 8;
-		case "C-":
-			return 9;
-		case "D+":
-			return 10;
-		case "D0":
-			return 11;
-		case "D-":
-			return 12;
-		case "F":
-			return 13;
-		}
-		return -1;
-	}
-	public String convertStr(int i) {
-		switch(i) {
-		case 1:
-			return "A+";
-		case 2:
-			return "A0";
-		case 3:
-			return "A-";
-		case 4:
-			return "B+";
-		case 5:
-			return "B0";
-		case 6:
-			return "B-";
-		case 7:
-			return "C+";
-		case 8:
-			return "C0";
-		case 9:
-			return "C-";
-		case 10:
-			return "D+";
-		case 11:
-			return "D0";
-		case 12:
-			return "D-";
-		case 13:
-			return "F";
-		}
-		return "";
-	}
 	public void print(String[] arr) {
 		for(String s:arr)System.out.println(s+" ");
 		System.out.println();
