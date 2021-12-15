@@ -53,7 +53,32 @@ class Queens_Attack_2_ {
         }
         return true;
     }
-
+    public static int queensAttack2(int n, int k, int r_q, int c_q, List<List<Integer>> obstacles) {
+    	HashMap<String, String> hm = new HashMap<String, String>();
+    	for(List<Integer> list : obstacles) {
+    		hm.put(list.get(0)+"-"+list.get(1), "obs");
+    	}
+    	int answer=0;
+    	int[] dy= {1, -1,  0, 0, 1, -1,  1,  -1};
+    	int[] dx= {0,  0, -1, 1, 1,  1, -1, -1};
+    	for(int i=0;i<dx.length;i++) {
+    		int ny = r_q;
+    		int nx = c_q;
+    		while(true) {
+    			ny+=dy[i];
+    			nx+=dx[i];
+    			if(nx<=0||ny<=0||nx>n||ny>n) {
+    				break;
+    			}
+    			String key=ny+"-"+nx;
+    			if(hm.containsKey(key)) {
+    				break;
+    			}
+    			answer++;
+    		}
+    	}
+    	return answer;
+    }
 }
 
 public class Queens_Attack_2 {
@@ -87,7 +112,7 @@ public class Queens_Attack_2 {
             }
         });
 
-        int result = Queens_Attack_2_.queensAttack(n, k, r_q, c_q, obstacles);
+        int result = Queens_Attack_2_.queensAttack2(n, k, r_q, c_q, obstacles);
 
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
