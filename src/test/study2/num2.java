@@ -66,7 +66,7 @@ public class num2 {
         }
         return answer==0?0:min;
     }
-	//DeQueue 솔루션
+	//DeQueue를 이용한 monoqueue solution
 	public int solution4(int []nums, int k) {
 		Deque<Integer> dq = new ArrayDeque<Integer>();
 		int n = nums.length, ans = n+1;
@@ -97,4 +97,6 @@ public class num2 {
 		}
 		return ans==n+1?-1:ans;
 	}
+	//Time Complexity: O(N), where N is the length of A.
+	//Space Complexity: O(N).
 }
