@@ -1,4 +1,6 @@
-class Solution {
+package leetcode.easy.palindromenumber;
+
+class Solution{
     public boolean isPalindrome(int x) {
         String s = String.valueOf(x);
         int l=0;

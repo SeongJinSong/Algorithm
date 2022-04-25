@@ -36,4 +36,4 @@
 </ul>
 
 <p>&nbsp;</p>
-<strong>Follow up:</strong> Could you solve it without converting the integer to a string?</div>
+<strong>Follow up:</strong> Could you solve it without converting the integer to a string?
