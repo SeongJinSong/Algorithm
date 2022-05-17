@@ -1,6 +1,7 @@
 package leetcode.lv2;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SubArraySumEqualK {
     public static void main(String[] args) {
@@ -18,8 +19,27 @@ public class SubArraySumEqualK {
         System.out.println(res4+" "+(res4==result4));
         System.out.println(res5+" "+(res5==result5));
     }
-    public boolean[][] map;
     public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> sum = new HashMap<>();
+        int ans = 0;
+        sum.put(0, 1); // 처음부터 모두 더해서 k인 곳을 위해서 넣어준다.
+
+        int total = 0;
+        for(int i=0;i<nums.length;i++){
+            total+=nums[i];
+
+            // S(0, i)-k가 HashMap에 있는지 확인한다.
+            if (sum.containsKey(total - k)) {
+                ans += sum.get(total - k);
+            }
+
+            // S(0, i)를 HashMap에 넣어준다.
+            sum.put(total, sum.getOrDefault(total, 0) + 1);
+        }
+        return ans;
+    }
+    public boolean[][] map;
+    public int subarraySum2(int[] nums, int k) {
         map = new boolean[nums.length][nums.length];
         return dfs(0, 0, nums, k);
     }
